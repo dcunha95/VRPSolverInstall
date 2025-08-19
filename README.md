@@ -6,7 +6,8 @@ The workflow is designed for installation via WSL (Windows Subsystem for Linux) 
 ## Basic Usage (Windows)
  
 1. Download this repository in a common folder:
-  On this page click on *Code* > *Download ZIP*. Save it to the *Downloads* folder.
+
+On this page click on *Code* > *Download ZIP*. Save it to the *Downloads* folder.
   If you are familiar with git, you might clone this repo in a preferred manner.
    
 3. Open PowerShell as Administrator
