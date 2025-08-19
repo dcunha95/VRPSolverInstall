@@ -4,10 +4,17 @@ This repository is designed as a series of scripts to assist new users in instal
 The workflow is designed for installation via WSL (Windows Subsystem for Linux) on Windows, although it might also find use for dedicated linux users (dual-boot or similar). 
 
 ## Basic Usage (Windows)
+ 
+1. Download this repository in a common folder:
+  On this page click on *Code* > *Download ZIP*. Save it to the *Downloads* folder.
+  If you are familiar with git, you might clone this repo in a preferred manner.
+   
+3. Open PowerShell as Administrator
+  To run PowerShell as an administrator, search for "PowerShell" in the Start menu, right-click on it, and select "Run as administrator."
+  Alternatively, you can press Win + R, type "powershell," and then press Ctrl + Shift + Enter.
 
-1. Download or clone this repository in a common folder (such as *Downloads*), unzipping if necessary
-2. Open PowerShell as Administrator
-3. Go to the repository folder. If 
+5. Go to the repository folder.
+  If you have downloaded a zip file and unzipped it in the Downloads folder, then run the following: 
   ```powershell
   cd Downloads\VRPSolverInstall-main\
   ```
