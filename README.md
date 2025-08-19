@@ -18,7 +18,6 @@ After that go to the home directory (copy-paste the snippet below in your PowerS
 
 ```powershell
 cd ~
-
 ```
 
 3. **Go to the repository folder**
