@@ -8,19 +8,37 @@ The workflow is designed for installation via WSL (Windows Subsystem for Linux) 
 1. **Download this repository in a common folder**
 
 On this page click on *Code* > *Download ZIP*. Save it to the *Downloads* folder.
-If you are familiar with git, you might clone this repo in a preferred manner.
+If you are familiar with git, you might clone this repo in your preferred manner.
  
-**3. Open PowerShell as Administrator**
+2. **Open PowerShell as Administrator**
 
 To run PowerShell as an administrator, search for "PowerShell" in the Start menu, right-click on it, and select "Run as administrator."
-Alternatively, you can press Win + R, type "powershell," and then press Ctrl + Shift + Enter.
+Alternatively, you can press Win + R, type "powershell," and then press Ctrl + Shift + Enter. 
+After that go to the home directory (copy-paste the snippet below in your PowerShell terminal and press Enter):
 
-5. Go to the repository folder.
+```powershell
+cd ~
 
-If you have downloaded a zip file and unzipped it in the Downloads folder, then run the following: 
+```
+
+3. **Go to the repository folder**
+
+Assuming you have downloaded a zip file and put it in the *Downloads* folder, unzip it: 
+
+```powershell
+unzip Downloads\VRPSolverInstall-main.zip
+```
+
+Go to the folder
+
 ```powershell
 cd Downloads\VRPSolverInstall-main\
 ```
+
+
+
+
+
 
 1. **Save the script** as `part1_wsl_setup.ps1`
 2. Save 
