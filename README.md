@@ -26,7 +26,7 @@ Assuming you have downloaded a zip file and put it in the *Downloads* folder, un
 
 ```powershell
 cd Downloads
-unzip Downloads\VRPSolverInstall-main.zip
+unzip VRPSolverInstall-main.zip
 cd VRPSolverInstall-main
 ```
 
