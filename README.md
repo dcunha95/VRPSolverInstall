@@ -22,18 +22,20 @@ cd ~
 
 3. **Go to the repository folder**
 
-Assuming you have downloaded a zip file and put it in the *Downloads* folder, unzip it: 
+Assuming you have downloaded a zip file and put it in the *Downloads* folder, unzip it and go to the folder: 
 
 ```powershell
+cd Downloads
 unzip Downloads\VRPSolverInstall-main.zip
+cd VRPSolverInstall-main
 ```
 
-Go to the folder
+4. **Download CPLEX**
 
-```powershell
-cd Downloads\VRPSolverInstall-main\
-```
+For academics, go the website (), register and download CPLEX for **LINUX x86-64**. 
+  
 
+6. **Run the first part**
 
 
 
