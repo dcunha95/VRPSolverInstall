@@ -3,7 +3,7 @@
 This repository is designed as a series of scripts to assist new users in installing VRPSolver. 
 The workflow is designed for installation via WSL (Windows Subsystem for Linux) on Windows, although it might also find use for dedicated linux users (dual-boot or similar). 
 
-## Basic Usage (Windows)
+## Guide 
  
 1. **Download this repository in a common folder**
 
@@ -36,9 +36,9 @@ For academics, go the website (https://academic.ibm.com/a2mt/), register and dow
 It should be under the *Data Science* field. 
 When selecting the correct version, you might set the download method to HTTP if you don't want to install IBM's dedicated installer.
 
-Make sure to download to the repository folder (`Downloads\VRPSolverInstall-main`), as the script will use it.
+Make sure to download to the repository folder (e.g. `Downloads\VRPSolverInstall-main`), as the script will use it.
 
-6. **Run the first part (Install WSL)**
+5. **Run the part 1 script: Install WSL**
 
 <!-- ```powershell
 # Basic installation with Ubuntu 22.04 (default)
@@ -57,13 +57,9 @@ Run the first part of the script to install WSL with Ubuntu 22.04:
 .\part1_wsl_setup.ps1
 ```
 
-If for whatever reason you need to 
+6. **Run the part 2: Setup the WSL environment**
 
 
-
-3. **Run PowerShell as Administrator**
-4. **Download CPLEX for Linux x86-64**
-5. **Execute with parameters:**
 
 
 ## What the script does:
