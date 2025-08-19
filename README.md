@@ -32,22 +32,12 @@ cd VRPSolverInstall-main
 
 4. **Download CPLEX**
 
-For academics, go the website (), register and download CPLEX for **LINUX x86-64**. 
-  
+For academics, go the website (https://academic.ibm.com/a2mt/), register and download CPLEX for **LINUX x86-64**. 
+Make sure to download to the repository folder (`Downloads\VRPSolverInstall-main`), as the script will use it.
 
-6. **Run the first part**
+6. **Run the first part (Install WSL)**
 
-
-
-
-
-1. **Save the script** as `part1_wsl_setup.ps1`
-2. Save 
-3. **Run PowerShell as Administrator**
-4. **Download CPLEX for Linux x86-64**
-5. **Execute with parameters:**
-
-```powershell
+<!-- ```powershell
 # Basic installation with Ubuntu 22.04 (default)
 .\part1_wsl_setup.ps1
 
@@ -56,7 +46,22 @@ For academics, go the website (), register and download CPLEX for **LINUX x86-64
 
 # Include a script to run inside WSL
 .\part1_wsl_setup.ps1 -UbuntuVersion "22.04" -Libraries @("python3", "python3-pip") -ScriptToRun "C:\path\to\your\script.sh"
+``` -->
+
+Run the first part of the script to install WSL with Ubuntu 22.04:
+
+```powershell
+.\part1_wsl_setup.ps1
 ```
+
+If for whatever reason you need to 
+
+
+
+3. **Run PowerShell as Administrator**
+4. **Download CPLEX for Linux x86-64**
+5. **Execute with parameters:**
+
 
 ## What the script does:
 
