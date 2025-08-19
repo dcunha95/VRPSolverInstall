@@ -32,7 +32,7 @@ cd VRPSolverInstall-main
 
 4. **Download CPLEX**
 
-For academics, go the website (https://academic.ibm.com/a2mt/), register and download CPLEX for **LINUX x86-64**. 
+For academics, go the website (https://academic.ibm.com/a2mt/), register and download CPLEX vX **FOR LINUX x86-64**. 
 Make sure to download to the repository folder (`Downloads\VRPSolverInstall-main`), as the script will use it.
 
 6. **Run the first part (Install WSL)**
