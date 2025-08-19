@@ -7,7 +7,8 @@ The workflow is designed for installation via WSL (Windows Subsystem for Linux) 
 
 1. **Save the script** as `part1_wsl_setup.ps1`
 2. **Run PowerShell as Administrator**
-3. **Execute with parameters:**
+3. **Download CPLEX for Linux x86-64**
+4. **Execute with parameters:**
 
 ```powershell
 # Basic installation with Ubuntu 22.04 (default)
