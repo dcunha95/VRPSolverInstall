@@ -40,7 +40,9 @@ Make sure to download to the repository folder (e.g. `Downloads\VRPSolverInstall
 
 5. **Download BaPCod**
 
-Go to the website (https://bapcod-process.math.u-bordeaux.fr/index.html#download), fill the form, accept the agreement and download the zip file to the repository folder (e.g. *Downloads/VRPSolverInstall-main*)
+Go to the website (https://bapcod-process.math.u-bordeaux.fr/index.html#download), fill the form, accept the agreement and download the zip file.
+
+Make sure to download to the repository folder (e.g. `Downloads\VRPSolverInstall-main`), as the script will use it.
 
 5. **Run the part 1 script: Install WSL**
 
