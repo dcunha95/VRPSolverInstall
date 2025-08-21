@@ -180,7 +180,7 @@ if (-not $Phase2) {
         $ubuntuInstalled = $installedDistros | Where-Object { $_ -match "Ubuntu" }
         
         if (-not $ubuntuInstalled) {
-            Write-Log "Installing Ubuntu $UbuntuVersion from Microsoft Store..."
+            Write-Log "Installing Ubuntu $UbuntuVersion"
             
             # winget install --id $packageName --source msstore --accept-package-agreements --accept-source-agreements
             wsl --install -d Ubuntu-22.04
@@ -309,8 +309,8 @@ if (-not $Phase2) {
         Write-Host "`nInstalled WSL distributions:" -ForegroundColor Cyan
         wsl --list --verbose
         
-        Write-Host "`nWSL version:" -ForegroundColor Cyan
-        wsl --version
+        # Write-Host "`nWSL version:" -ForegroundColor Cyan
+        # wsl --version
     } catch {
         Write-Log "Could not retrieve WSL information" "WARNING"
     }
