@@ -69,9 +69,10 @@ Run the first part of the script to install WSL with Ubuntu 22.04:
 .\part1_wsl_setup.ps1
 ```
 
-If the script asks to reboot the machine, please do so, repeat steps 2 and 3 and then continue the setup by running:
+If the script asks to reboot the machine, please do so, repeat steps 2 and then continue the setup by running:
 
 ```powershell
+cd ~\Downloads\VRPSolverInstall-main
 .\part1_wsl_setup.ps1 -Phase2
 ```
 
