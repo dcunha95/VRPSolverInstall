@@ -180,7 +180,7 @@ if (-not $Phase2) {
         $ubuntuInstalled = $installedDistros | Where-Object { $_ -match "Ubuntu" }
         
         if (-not $ubuntuInstalled) {
-            Write-Log "Installing Ubuntu $UbuntuVersion from Microsoft Store..."
+            Write-Log "Installing Ubuntu $UbuntuVersion"
             
             # winget install --id $packageName --source msstore --accept-package-agreements --accept-source-agreements
             wsl --install -d Ubuntu-22.04
