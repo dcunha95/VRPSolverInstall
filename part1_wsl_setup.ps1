@@ -181,7 +181,10 @@ if (-not $Phase2) {
         
         if (-not $ubuntuInstalled) {
             Write-Log "Installing Ubuntu $UbuntuVersion from Microsoft Store..."
+            
             winget install --id $packageName --source msstore --accept-package-agreements --accept-source-agreements
+            wsl --install -d Ubuntu-22.04
+            
             Write-Log "Ubuntu $UbuntuVersion installed successfully" "SUCCESS"
         } else {
             Write-Log "Ubuntu is already installed" "WARNING"
