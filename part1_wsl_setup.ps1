@@ -262,6 +262,13 @@ if (-not $Phase2) {
         Write-Log "Script file not found: $ScriptToRun" "WARNING"
     }
 
+    # Step 9: Setup shortcut
+    $ShortcutPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\WSL.lnk"
+    $WshShell = New-Object -comObject WScript.Shell
+    $Shortcut = $WshShell.CreateShortcut($ShortcutPath)
+    $Shortcut.HotKey = "CTRL+ALT+T"
+    $Shortcut.Save()
+
     # Step 9: Display WSL information
     Write-Log "WSL setup completed! Here's your current configuration:"
     try {
