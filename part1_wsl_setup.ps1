@@ -290,8 +290,7 @@ if (-not $Phase2) {
 
 
         # Copy script to WSL
-        $scriptName = Split-Path $ScriptToRun -Leaf
-        $winRepoPath = $PSScriptRoot.Replace('\', '/').Replace('C:', '/mnt/c')
+        $winRepoPath = $PSScriptRoot.ToString().Replace('\', '/').Replace('C:', '/mnt/c')
         
         # Convert Windows path to WSL path and cp the repo folder to the linux home
         wsl -- bash -c "cp -r '$winRepoPath' ~/"
