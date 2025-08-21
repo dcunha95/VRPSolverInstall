@@ -194,20 +194,19 @@ if (-not $Phase2) {
         exit 1
     }
 
-    # Step: Setup shortcut
-    Write-Log "Setting keyboard shortcut"
-    try {
-        $ShortcutPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\WSL.lnk"
-        $WshShell = New-Object -comObject WScript.Shell
-        $Shortcut = $WshShell.CreateShortcut($ShortcutPath)
-        $Shortcut.HotKey = "CTRL+ALT+T"
-        $Shortcut.Save()
-        Write-Log "Keyboard shortcut set to Ctrl+Alt+T" "SUCCESS"
+    # # Step: Setup shortcut
+    # Write-Log "Setting keyboard shortcut"
+    # try {
+    #     $ShortcutPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\WSL.lnk"
+    #     $WshShell = New-Object -comObject WScript.Shell
+    #     $Shortcut = $WshShell.CreateShortcut($ShortcutPath)
+    #     $Shortcut.HotKey = "CTRL+ALT+T"
+    #     $Shortcut.Save()
+    #     Write-Log "Keyboard shortcut set to Ctrl+Alt+T" "SUCCESS"
 
-    } catch {
-        Write-Log "Could not setup keyboard shortcut. You will need to set it up manually (or open it in another way)." "WARNING"
-    }
-
+    # } catch {
+    #     Write-Log "Could not setup keyboard shortcut. You will need to set it up manually (or open it in another way)." "WARNING"
+    # }
 
     # Step: Initialize Ubuntu (first run)
     Write-Log "Initializing Ubuntu (this may take a few minutes)..."
@@ -240,6 +239,33 @@ if (-not $Phase2) {
     } catch {
         Write-Log "Failed to initialize Ubuntu: $($_.Exception.Message)" "ERROR"
     }
+
+    # Step: Setup shortcut
+    Write-Log "Setting keyboard shortcut"
+    try {
+        $UbuntuVersionNoPt = $UbuntuVersion.Replace(".","")
+        $ShortcutPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\terminal_ubuntu$UbuntuVersionNoPt.lnk"
+        $WshShell = New-Object -comObject WScript.Shell
+        $Shortcut = $WshShell.CreateShortcut($ShortcutPath)
+
+        # Set properties
+        $Shortcut.HotKey = "Ctrl+Alt+T"
+        $Shortcut.TargetPath = $ubuntuExe.FullName
+        $Shortcut.Description = "Opens $($ubuntuExe.Name)"
+
+        # $Shortcut.TargetPath = "C:\Program Files\MyApp\MyApp.exe"
+        # $Shortcut.WorkingDirectory = "C:\Program Files\MyApp"
+        # $Shortcut.Arguments = "--startup-parameter"
+        # $Shortcut.IconLocation = "C:\Program Files\MyApp\MyApp.exe,0"
+        # $Shortcut.WindowStyle = 1  # 1=Normal, 3=Maximized, 7=Minimized
+
+        $Shortcut.Save()
+        Write-Log "Keyboard shortcut set to Ctrl+Alt+T" "SUCCESS"
+
+    } catch {
+        Write-Log "Could not setup keyboard shortcut. You will need to set it up manually (or open it in another way)." "WARNING"
+    }
+
 
     # # Step 6: Update Ubuntu system
     # Write-Log "Updating Ubuntu system..."
