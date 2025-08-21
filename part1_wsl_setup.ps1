@@ -294,7 +294,7 @@ if (-not $Phase2) {
         $winRepoPath = $PSScriptRoot.Replace('\', '/').Replace('C:', '/mnt/c')
         
         # Convert Windows path to WSL path and cp the repo folder to the linux home
-        wsl -d Ubuntu -- bash -c "cp '$windowsPath' ~/"
+        wsl -d Ubuntu -- bash -c "cp -r '$windowsPath' ~/"
         # wsl -d Ubuntu -- bash -c "chmod +x $wslScriptPath"
         # wsl -d Ubuntu -- bash -c "$wslScriptPath"
         
