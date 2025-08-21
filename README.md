@@ -33,7 +33,13 @@ unzip VRPSolverInstall-main.zip
 cd VRPSolverInstall-main
 ```
 
-4. **Download CPLEX**
+4. **Download BaPCod**
+
+Go to the website (https://bapcod-process.math.u-bordeaux.fr/index.html#download), fill the form, accept the agreement and download the zip file.
+
+Make sure to download to the repository folder (e.g. `Downloads\VRPSolverInstall-main`), as the script will use it.
+
+5. **Download CPLEX**
 
 For academics, go the website (https://academic.ibm.com/a2mt/), register and download CPLEX **FOR LINUX x86-64**.
 It should be under the *Data Science* field. 
@@ -41,13 +47,8 @@ When selecting the correct version, you might set the download method to HTTP if
 
 Make sure to download to the repository folder (e.g. `Downloads\VRPSolverInstall-main`), as the script will use it.
 
-5. **Download BaPCod**
 
-Go to the website (https://bapcod-process.math.u-bordeaux.fr/index.html#download), fill the form, accept the agreement and download the zip file.
-
-Make sure to download to the repository folder (e.g. `Downloads\VRPSolverInstall-main`), as the script will use it.
-
-5. **Run the part 1 script: Install WSL**
+6. **Run the part 1 script: Install WSL**
 
 <!-- ```powershell
 # Basic installation with Ubuntu 22.04 (default)
@@ -66,9 +67,15 @@ Run the first part of the script to install WSL with Ubuntu 22.04:
 .\part1_wsl_setup.ps1
 ```
 
-6. **Run the part 2: Setup the WSL environment**
+If the script asks to reboot the machine, please do so and then continue the setup by running:
 
+```powershell
+.\part1_wsl_setup.ps1 -Phase2
+```
 
+7. **Run the part 2: Setup the linux environment**
+
+You should now have a copy of the repository in your home directory in linux with 
 
 
 ## What the script does:
