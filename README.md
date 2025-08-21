@@ -38,8 +38,6 @@ cd VRPSolverInstall-main
 4. **Download BaPCod**
 
 Go to the website (https://bapcod-process.math.u-bordeaux.fr/index.html#download), fill the form, accept the agreement and download the zip file.
-<a href="https://bapcod-process.math.u-bordeaux.fr/index.html#download" target="_blank">Link Text</a>
-
 
 Make sure to download to the repository folder (e.g. `Downloads\VRPSolverInstall-main`), as the script will use it.
 
