@@ -22,7 +22,7 @@ cd ~
 
 3. **Go to the repository folder**
 
-Assuming you have downloaded a zip file and put it in the *Downloads* folder, unzip it and go to the folder: 
+Assuming you have downloaded a zip file and put it in the *Downloads* folder, unzip it and go to the folder:
 
 ```powershell
 cd Downloads
@@ -37,6 +37,10 @@ It should be under the *Data Science* field.
 When selecting the correct version, you might set the download method to HTTP if you don't want to install IBM's dedicated installer.
 
 Make sure to download to the repository folder (e.g. `Downloads\VRPSolverInstall-main`), as the script will use it.
+
+5. **Download BaPCod**
+
+Go to the website (https://bapcod-process.math.u-bordeaux.fr/index.html#download), fill the form, accept the agreement and download the zip file to the repository folder (*Downloads/VRPSolverInstall-main*)
 
 5. **Run the part 1 script: Install WSL**
 
