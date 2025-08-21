@@ -309,8 +309,8 @@ if (-not $Phase2) {
         Write-Host "`nInstalled WSL distributions:" -ForegroundColor Cyan
         wsl --list --verbose
         
-        Write-Host "`nWSL version:" -ForegroundColor Cyan
-        wsl --version
+        # Write-Host "`nWSL version:" -ForegroundColor Cyan
+        # wsl --version
     } catch {
         Write-Log "Could not retrieve WSL information" "WARNING"
     }
