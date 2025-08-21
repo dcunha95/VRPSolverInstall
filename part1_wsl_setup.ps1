@@ -288,7 +288,7 @@ if (-not $Phase2) {
     }
 
     Write-Log "WSL setup process completed!" "SUCCESS"
-    Write-Host "`nYou can now use WSL by typing 'wsl' or 'ubuntu' in PowerShell or Command Prompt." -ForegroundColor Green
+    Write-Host "`nYou can now use WSL by typing 'wsl' or 'ubuntu' in PowerShell or Command Prompt, or use the shortcut CTRL+ALT+T." -ForegroundColor Green
 }
 
 # Pause to allow user to read output
