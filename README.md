@@ -3,9 +3,10 @@
 This repository is designed as a series of scripts to assist new users in installing VRPSolver. 
 The workflow is designed for installation via WSL (Windows Subsystem for Linux) on Windows, although it might also find use for dedicated linux users (dual-boot or similar). 
 
+If you are using Windows, please make sure you are running the latest version of 10 or 11 to avoid headaches.
+
 ## Main usage guide 
 
-Please make sure you are running the latest version of Windows 10 or 11 to avoid headaches.
  
 1. **Download this repository in a common folder**
 
