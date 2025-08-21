@@ -162,10 +162,10 @@ if (-not $Phase2) {
     try {
         # Map version to store package name
         $ubuntuPackages = @{
-            "18.04" = "Ubuntu.1804"
-            "20.04" = "Ubuntu.2004"
-            "22.04" = "Ubuntu.2204" 
-            "24.04" = "Ubuntu.2404"
+            "18.04" = "Ubuntu-18.04"
+            "20.04" = "Ubuntu-20.04" 
+            "22.04" = "Ubuntu-22.04"
+            "24.04" = "Ubuntu-24.04"
         }
         
         $packageName = $ubuntuPackages[$UbuntuVersion]
@@ -182,7 +182,7 @@ if (-not $Phase2) {
         if (-not $ubuntuInstalled) {
             Write-Log "Installing Ubuntu $UbuntuVersion from Microsoft Store..."
             
-            winget install --id $packageName --source msstore --accept-package-agreements --accept-source-agreements
+            # winget install --id $packageName --source msstore --accept-package-agreements --accept-source-agreements
             wsl --install -d Ubuntu-22.04
             
             Write-Log "Ubuntu $UbuntuVersion installed successfully" "SUCCESS"
@@ -194,7 +194,22 @@ if (-not $Phase2) {
         exit 1
     }
 
-    # Step 5: Initialize Ubuntu (first run)
+    # Step: Setup shortcut
+    Write-Log "Setting keyboard shortcut"
+    try {
+        $ShortcutPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\WSL.lnk"
+        $WshShell = New-Object -comObject WScript.Shell
+        $Shortcut = $WshShell.CreateShortcut($ShortcutPath)
+        $Shortcut.HotKey = "CTRL+ALT+T"
+        $Shortcut.Save()
+        Write-Log "Keyboard shortcut set to Ctrl+Alt+T" "SUCCESS"
+
+    } catch {
+        Write-Log "Could not setup keyboard shortcut. You will need to set it up manually (or open it in another way)." "WARNING"
+    }
+
+
+    # Step: Initialize Ubuntu (first run)
     Write-Log "Initializing Ubuntu (this may take a few minutes)..."
     Write-Log "Please complete the Ubuntu initial setup when prompted (create username and password)..."
     try {
@@ -209,8 +224,11 @@ if (-not $Phase2) {
             # Try to find Ubuntu executable in WindowsApps
             $ubuntuExe = Get-ChildItem -Path "$env:LOCALAPPDATA\Microsoft\WindowsApps" -Filter "ubuntu*.exe" | Select-Object -First 1
             if ($ubuntuExe) {
-                & $ubuntuExe.FullName
+                # & $ubuntuExe.FullName
+
+                Start-Process $ubuntuExe.FullName           
                 $launched = $true
+                Read-Host -Prompt "After completing the initial setup, press [Enter] to continue"
             }
         }
         
@@ -218,59 +236,72 @@ if (-not $Phase2) {
             Write-Log "Could not automatically launch Ubuntu. Please run 'ubuntu' from Start Menu to complete setup." "WARNING"
             pause
         }
+        
     } catch {
         Write-Log "Failed to initialize Ubuntu: $($_.Exception.Message)" "ERROR"
     }
 
-    # Step 6: Update Ubuntu system
-    Write-Log "Updating Ubuntu system..."
+    # # Step 6: Update Ubuntu system
+    # Write-Log "Updating Ubuntu system..."
+    # try {
+    #     wsl -d Ubuntu -- bash -c "sudo apt update && sudo apt upgrade -y"
+    #     Write-Log "Ubuntu system updated successfully" "SUCCESS"
+    # } catch {
+    #     Write-Log "Failed to update Ubuntu system: $($_.Exception.Message)" "WARNING"
+    # }
+
+    # # Step 7: Install specified libraries
+    # if ($Libraries.Count -gt 0) {
+    #     Write-Log "Installing specified libraries: $($Libraries -join ', ')..."
+    #     try {
+    #         $libraryString = $Libraries -join ' '
+    #         wsl -d Ubuntu -- bash -c "sudo apt install -y $libraryString"
+    #         Write-Log "Libraries installed successfully" "SUCCESS"
+    #     } catch {
+    #         Write-Log "Failed to install some libraries: $($_.Exception.Message)" "WARNING"
+    #     }
+    # }
+
+    # # Step 8: Copy and run additional script if specified
+    # if ($ScriptToRun -and (Test-Path $ScriptToRun)) {
+    #     Write-Log "Copying and executing script: $ScriptToRun..."
+    #     try {
+    #         # Copy script to WSL
+    #         $scriptName = Split-Path $ScriptToRun -Leaf
+    #         $wslScriptPath = "/tmp/$scriptName"
+            
+    #         # Convert Windows path to WSL path
+    #         $windowsPath = $ScriptToRun.Replace('\', '/').Replace('C:', '/mnt/c')
+    #         wsl -d Ubuntu -- bash -c "cp '$windowsPath' $wslScriptPath"
+    #         wsl -d Ubuntu -- bash -c "chmod +x $wslScriptPath"
+    #         wsl -d Ubuntu -- bash -c "$wslScriptPath"
+            
+    #         Write-Log "Script executed successfully" "SUCCESS"
+    #     } catch {
+    #         Write-Log "Failed to execute script: $($_.Exception.Message)" "ERROR"
+    #     }
+    # } elseif ($ScriptToRun) {
+    #     Write-Log "Script file not found: $ScriptToRun" "WARNING"
+    # }
+
+    # Step 8: Copy files to linux home
+    Write-Log "Copying repo to linux home: $ScriptToRun..."
     try {
-        wsl -d Ubuntu -- bash -c "sudo apt update && sudo apt upgrade -y"
-        Write-Log "Ubuntu system updated successfully" "SUCCESS"
+
+
+        # Copy script to WSL
+        $scriptName = Split-Path $ScriptToRun -Leaf
+        $winRepoPath = $PSScriptRoot.Replace('\', '/').Replace('C:', '/mnt/c')
+        
+        # Convert Windows path to WSL path and cp the repo folder to the linux home
+        wsl -d Ubuntu -- bash -c "cp '$windowsPath' ~/"
+        # wsl -d Ubuntu -- bash -c "chmod +x $wslScriptPath"
+        # wsl -d Ubuntu -- bash -c "$wslScriptPath"
+        
+        Write-Log "Repo copied to linux home" "SUCCESS"
     } catch {
-        Write-Log "Failed to update Ubuntu system: $($_.Exception.Message)" "WARNING"
+        Write-Log "Failed to execute script: $($_.Exception.Message)" "ERROR"
     }
-
-    # Step 7: Install specified libraries
-    if ($Libraries.Count -gt 0) {
-        Write-Log "Installing specified libraries: $($Libraries -join ', ')..."
-        try {
-            $libraryString = $Libraries -join ' '
-            wsl -d Ubuntu -- bash -c "sudo apt install -y $libraryString"
-            Write-Log "Libraries installed successfully" "SUCCESS"
-        } catch {
-            Write-Log "Failed to install some libraries: $($_.Exception.Message)" "WARNING"
-        }
-    }
-
-    # Step 8: Copy and run additional script if specified
-    if ($ScriptToRun -and (Test-Path $ScriptToRun)) {
-        Write-Log "Copying and executing script: $ScriptToRun..."
-        try {
-            # Copy script to WSL
-            $scriptName = Split-Path $ScriptToRun -Leaf
-            $wslScriptPath = "/tmp/$scriptName"
-            
-            # Convert Windows path to WSL path
-            $windowsPath = $ScriptToRun.Replace('\', '/').Replace('C:', '/mnt/c')
-            wsl -d Ubuntu -- bash -c "cp '$windowsPath' $wslScriptPath"
-            wsl -d Ubuntu -- bash -c "chmod +x $wslScriptPath"
-            wsl -d Ubuntu -- bash -c "$wslScriptPath"
-            
-            Write-Log "Script executed successfully" "SUCCESS"
-        } catch {
-            Write-Log "Failed to execute script: $($_.Exception.Message)" "ERROR"
-        }
-    } elseif ($ScriptToRun) {
-        Write-Log "Script file not found: $ScriptToRun" "WARNING"
-    }
-
-    # Step 9: Setup shortcut
-    $ShortcutPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\WSL.lnk"
-    $WshShell = New-Object -comObject WScript.Shell
-    $Shortcut = $WshShell.CreateShortcut($ShortcutPath)
-    $Shortcut.HotKey = "CTRL+ALT+T"
-    $Shortcut.Save()
 
     # Step 9: Display WSL information
     Write-Log "WSL setup completed! Here's your current configuration:"
