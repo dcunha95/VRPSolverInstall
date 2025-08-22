@@ -91,10 +91,10 @@ It should look something like the picture below:
 
 <img width="1487" height="195" alt="image" src="https://github.com/user-attachments/assets/a251d56d-18c0-43f4-b3d9-a1c7ae9f40b0" />
 
-Finally, run the script with `sudo`:
+Originally the script would be run with the command `sudo ./part2_linux_setup.sh`. However, we also desire to store a log, thus run the following:
  
 ```bash
-sudo ./part2_linux_setup.sh
+sudo script -c "./test.sh" ./test.log
 ```
 
 
