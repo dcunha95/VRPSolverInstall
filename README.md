@@ -79,10 +79,19 @@ cd ~\Downloads\VRPSolverInstall-main
 7. **Run the part 2: Setup the linux environment**
 
 You should now have a copy of the repository in your home directory in linux with copies of CPLEX and BaPCod inside.
-Open the terminal (CTRL+ALT+T) and run the script `part2_linux_setup.sh` with `sudo`, providing permissions to execute first:
+Open the terminal with your preferred method (Ctrl+Alt+T) and run the script `part2_linux_setup.sh` with `sudo`, providing permissions to execute first:
+
 
 ```bash
+cd VRPSolverInstall
 chmod +x part2_linux_setup.sh
+```
+
+It should look something like the picture below:
+
+<img width="929" height="169" alt="terminal_view" src="https://github.com/user-attachments/assets/58f5e372-cf49-43c9-80b3-27dcd4598f4d" />
+
+```bash
 sudo ./part2_linux_setup.sh
 ```
 
