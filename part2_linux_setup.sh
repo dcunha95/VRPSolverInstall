@@ -3,12 +3,27 @@
 # script -c "./myscript.sh" ./myscript.log   
 # script part2_linux_setup_$(date +"%Y-%m-%d_%H:%M:%S").log
 
+# utility functions
 user_log() {
-    echo -e "\nlog:$(date +"%Y-%m-%d %H:%M:%S") ====================================  $@\n"
+    echo -e "\nlog : $(date +"%Y-%m-%d %H:%M:%S") ====================================  $@\n"
 }
 minor_log() {
-    echo -e "\nlog:$(date +"%Y-%m-%d %H:%M:%S") ===========  $@\n"
+    echo -e "\nlog : $(date +"%Y-%m-%d %H:%M:%S") ===========  $@\n"
 }
+
+if_dir_exists_remove() {
+    if [ -d "$1" ]; then
+        minor_log removing old $1
+        rm -r "$1"
+    fi
+}
+if_file_exists_remove() {
+    if [ -f "$1" ]; then
+        minor_log removing old $1
+        rm -r "$1"
+    fi
+}
+
 
 
 # get repo dir and run from it
@@ -16,12 +31,12 @@ ROOT_DIR=$(dirname "$(readlink -f "$0")")
 cd $ROOT_DIR
 user_log STARTING SETUP FROM $ROOT_DIR
 
-user_log UPDATING SYSTEM
-apt-get update
+# user_log UPDATING SYSTEM
+# apt-get update
 
-user_log INSTALLING SYSTEM DEPENDENCIES 
-apt install cmake default-jre g++
-apt-get install zlib1g-dev build-essential gdb
+# user_log INSTALLING SYSTEM DEPENDENCIES 
+# apt install cmake default-jre g++
+# apt-get install zlib1g-dev build-essential gdb unzip
 
 # user_log DOWNLOADING JULIA
 # # curl -fsSL https://install.julialang.org | sh
@@ -29,35 +44,81 @@ apt-get install zlib1g-dev build-essential gdb
 # user_log INSTALLING CPLEX
 # # ./cplex_studio2211.linux_x86_64.bin
 
-# user_log INSTALLING UNZIP
-# # apt-get install unzip
+user_log PREPARING BAPCOD
+LAST_BAPCOD=$(ls bapcod*zip | tail -n1)
+if_dir_exists_remove bapcodframework
+unzip -q $LAST_BAPCOD
 
-# user_log PREPARING BAPCOD
-# LAST_BAPCOD=$(ls bapcod*zip | tail -n1)
-# if [ -d "bapcodframework" ]; then
-#     minor_log removing old folder
-#     rm -r "bapcodframework"
-# fi
-# unzip -q $LAST_BAPCOD
-
-# cd bapcodframework/Tools/
-# if [ -f "rcsp.zip" ]; then
-#     minor_log unzipping rcsp.zip
-#     unzip -q rcsp.zip
-# fi
-# cd -
+cd bapcodframework/Tools/
+if [ -f "rcsp.zip" ]; then
+    minor_log unzipping rcsp.zip
+    unzip -q rcsp.zip
+fi
+cd -
 
 minor_log installing boost and lemon
 cd bapcodframework
 
+if_file_exists_remove Tools/boost_1_76_0.tar.gz
+if_dir_exists_remove Tools/boost_1_76_0
 wget -P Tools/ https://archives.boost.io/release/1.76.0/source/boost_1_76_0.tar.gz
-wget -P Tools/ http://lemon.cs.elte.hu/pub/sources/lemon-1.3.1.tar.gz
-bash Scripts/shell/install_bc_lemon.sh
 bash Scripts/shell/install_bc_boost.sh
 
-# user_log VRPSOLVER INSTALL DEFINITIONS
+if_file_exists_remove Tools/lemon-1.3.1.tar.gz
+if_dir_exists_remove Tools/lemon-1.3.1
+wget -P Tools/ http://lemon.cs.elte.hu/pub/sources/lemon-1.3.1.tar.gz
+bash Scripts/shell/install_bc_lemon.sh
 
-# echo "export $VAR_NAME=\"$VAR_VALUE\"" >> "$BASHRC_FILE"
+user_log SETTING ENV VARIABLES
+# Find and return full path of last folder alphabetically
+CPLEX_ROOT=$(find "/opt/ibm/ILOG/" -maxdepth 1 -type d -name "CPLEX_Studio*" | sort | tail -n 1)
+
+BOOST_ROOT=$ROOT_DIR/bapcodframework/Tools/boost_1_76_0/build
+
+print_and_export() {
+    echo "export $1=\"$2\""
+    export $1=$2
+}
+print_and_export CPLEX_ROOT $CPLEX_ROOT
+print_and_export BOOST_ROOT $BOOST_ROOT
+
+
+# Writing to .bashrc
+BASHRC_FILE="$HOME/.bashrc"
+user_log WRITING TO $BASHRC_FILE
+SECTION_START="# === VRPSOLVER INSTALL DEFINITIONS START ==="
+SECTION_END="# === VRPSOLVER INSTALL DEFINITIONS END ==="
+
+# Remove existing section if it exists
+if grep -q "$SECTION_START" "$BASHRC_FILE" 2>/dev/null; then
+    sed -i "/$SECTION_START/,/$SECTION_END/d" "$BASHRC_FILE"
+fi
+
+# Add new section
+cat >> "$BASHRC_FILE" << EOF
+
+$SECTION_START
+export CPLEX_ROOT=$CPLEX_ROOT
+export BOOST_ROOT=$BOOST_ROOT
+
+export MY_VAR="some_value"
+export PATH="\$PATH:/my/custom/path"
+alias ll="ls -la"
+alias grep='grep --color=auto'
+
+my_custom_function() {
+    echo "Hello from my script"
+}
+$SECTION_END
+EOF
+
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make -j3 bapcod
+
+
+user_log 
 
 # export PATH="$PATH:/opt/ibm/ILOG/CPLEX_Studio2212/cplex/bin/x86-64_linux/"
 # export CPLEX_ROOT="/opt/ibm/ILOG/CPLEX_Studio2212"
