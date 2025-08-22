@@ -94,7 +94,7 @@ It should look something like the picture below:
 Originally the script would be run with the command `sudo ./part2_linux_setup.sh`. However, we also desire to store a log, thus run the following:
  
 ```bash
-sudo script -c "./test.sh" ./test.log
+sudo script -c "./part2_linux_setup.sh" ./part2_linux_setup.log
 ```
 
 
