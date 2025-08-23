@@ -35,8 +35,8 @@ user_log STARTING SETUP FROM $ROOT_DIR
 # apt-get update
 
 # user_log INSTALLING SYSTEM DEPENDENCIES 
-# apt install cmake default-jre g++
-# apt-get install zlib1g-dev build-essential gdb unzip
+# apt install -y cmake default-jre g++ python-is-python3 python3-full
+# apt-get -y install zlib1g-dev build-essential gdb unzip expect
 
 # user_log DOWNLOADING JULIA
 # # curl -fsSL https://install.julialang.org | sh
@@ -94,7 +94,7 @@ if grep -q "$SECTION_START" "$BASHRC_FILE" 2>/dev/null; then
     sed -i "/$SECTION_START/,/$SECTION_END/d" "$BASHRC_FILE"
 fi
 
-# Add new section
+# Add/update new section
 cat >> "$BASHRC_FILE" << EOF
 
 $SECTION_START
@@ -112,13 +112,23 @@ my_custom_function() {
 $SECTION_END
 EOF
 
+user_log BUILDING BAPCOD
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 make -j3 bapcod
 
+minor_log running VertexColoring test
+cd Demos/VertexColoringDemo
+make -j3
+sh ./tests/runTests.sh 
 
-user_log 
+minor_log making shared library
+make -j3 bapcod-shared
+
+
+user_log INSTALLING VRPSolverDemos
+git clone https://github.com/artalvpes/VRPSolverDemos.git
 
 # export PATH="$PATH:/opt/ibm/ILOG/CPLEX_Studio2212/cplex/bin/x86-64_linux/"
 # export CPLEX_ROOT="/opt/ibm/ILOG/CPLEX_Studio2212"
