@@ -30,20 +30,25 @@ ROOT_DIR=$(dirname "$(readlink -f "$0")")
 cd $ROOT_DIR
 user_log STARTING SETUP FROM $ROOT_DIR
 
+# update system
 user_log UPDATING SYSTEM
 sudo apt-get update
 
-user_log INSTALLING SYSTEM DEPENDENCIES 
+# install dependencies
+user_log INSTALLING REQUIREMENTS 
 sudo apt install -y cmake default-jre g++ python-is-python3 python3-full
 sudo apt-get -y install zlib1g-dev build-essential gdb unzip expect
 
+# julia
 user_log DOWNLOADING JULIA
 curl -fsSL https://install.julialang.org | sh
 
+# cplex
 user_log INSTALLING CPLEX
 # sudo ./cplex_studio2211.linux_x86_64.bin
 sudo ./cplex_studio2211.linux_x86_64.bin -f "./misc/cplex_installation_options.properties"
 
+# unzipping bapcod
 user_log PREPARING BAPCOD
 LAST_BAPCOD=$(ls bapcod*zip | tail -n1)
 if_dir_exists_remove bapcodframework
@@ -59,16 +64,19 @@ cd -
 minor_log installing boost and lemon
 cd bapcodframework
 
+# boost
 if_file_exists_remove Tools/boost_1_76_0.tar.gz
 if_dir_exists_remove Tools/boost_1_76_0
 wget -P Tools/ https://archives.boost.io/release/1.76.0/source/boost_1_76_0.tar.gz
 bash Scripts/shell/install_bc_boost.sh
 
+# lemon
 if_file_exists_remove Tools/lemon-1.3.1.tar.gz
 if_dir_exists_remove Tools/lemon-1.3.1
 wget -P Tools/ http://lemon.cs.elte.hu/pub/sources/lemon-1.3.1.tar.gz
 bash Scripts/shell/install_bc_lemon.sh
 
+# environment variables
 user_log SETTING ENV VARIABLES
 # Find and return full path of last folder alphabetically
 # CPLEX_ROOT=/opt/ibm/ILOG/CPLEX_Studio2211
@@ -123,6 +131,10 @@ my_custom_function() {
 $SECTION_END
 EOF
 
+# refresh bashrc
+source ~/.bashrc
+
+# Bapcod
 user_log BUILDING BAPCOD
 mkdir build
 cd build
