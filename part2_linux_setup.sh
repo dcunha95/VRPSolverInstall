@@ -119,15 +119,6 @@ export CPLEX_ROOT=$CPLEX_ROOT
 export CPLEX_STUDIO_BINARIES=$CPLEX_STUDIO_BINARIES
 export BOOST_ROOT=$BOOST_ROOT
 export BAPCOD_RCSP_LIB=$BAPCOD_RCSP_LIB
-
-export MY_VAR="some_value"
-export PATH="\$PATH:/my/custom/path"
-alias ll="ls -la"
-alias grep='grep --color=auto'
-
-my_custom_function() {
-    echo "Hello from my script"
-}
 $SECTION_END
 EOF
 
@@ -161,7 +152,8 @@ cd VRPSolverDemos
 
 user_log Testing: julia src/run.jl data/A/A-n37-k6.vrp -m 6 -M 6 -u 950
 
-julia src/run.jl data/A/A-n37-k6.vrp -m 6 -M 6 -u 950
+# julia src/run.jl data/A/A-n37-k6.vrp -m 6 -M 6 -u 950
+~/.juliaup/bin/julia src/run.jl data/A/A-n37-k6.vrp -m 6 -M 6 -u 950
 
 user_log DONE
 minor_log May Dantzig-Wolfe help you in your journey
