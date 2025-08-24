@@ -71,20 +71,25 @@ bash Scripts/shell/install_bc_lemon.sh
 
 user_log SETTING ENV VARIABLES
 # Find and return full path of last folder alphabetically
+# CPLEX_ROOT=/opt/ibm/ILOG/CPLEX_Studio2211
 CPLEX_ROOT=$(find "/opt/ibm/ILOG/" -maxdepth 1 -type d -name "CPLEX_Studio*" | sort | tail -n 1)
+CPLEX_STUDIO_BINARIES=$CPLEX_ROOT/cplex/bin/x86-64_linux/
 
 BOOST_ROOT=$ROOT_DIR/bapcodframework/Tools/boost_1_76_0/build
 
 # doesn't exist yet, but whatever
 BAPCOD_RCSP_LIB=$ROOT_DIR/bapcodframework/build/Bapcod/libbapcod-shared.so
 
+
 print_and_export() {
     echo "export $1=\"$2\""
     export $1=$2
 }
 print_and_export CPLEX_ROOT $CPLEX_ROOT
+print_and_export CPLEX_STUDIO_BINARIES $CPLEX_STUDIO_BINARIES
 print_and_export BOOST_ROOT $BOOST_ROOT
 print_and_export BAPCOD_RCSP_LIB $BAPCOD_RCSP_LIB
+# export CPLEX_STUDIO_BINARIES=/opt/ibm/ILOG/CPLEX_Studio2211/cplex/bin/x86-64_linux/
 
 
 # Writing to .bashrc
@@ -103,6 +108,7 @@ cat >> "$BASHRC_FILE" << EOF
 
 $SECTION_START
 export CPLEX_ROOT=$CPLEX_ROOT
+export CPLEX_STUDIO_BINARIES=$CPLEX_STUDIO_BINARIES
 export BOOST_ROOT=$BOOST_ROOT
 export BAPCOD_RCSP_LIB=$BAPCOD_RCSP_LIB
 
@@ -139,6 +145,14 @@ cd $ROOT_DIR
 
 user_log INSTALLING VRPSolverDemos
 git clone https://github.com/artalvpes/VRPSolverDemos.git
+cd VRPSolverDemos
+
+user_log Testing: julia src/run.jl data/A/A-n37-k6.vrp -m 6 -M 6 -u 950
+
+julia src/run.jl data/A/A-n37-k6.vrp -m 6 -M 6 -u 950
+
+user_log DONE
+minor_log May Dantzig-Wolfe help you in your journey
 
 # export PATH="$PATH:/opt/ibm/ILOG/CPLEX_Studio2212/cplex/bin/x86-64_linux/"
 # export CPLEX_ROOT="/opt/ibm/ILOG/CPLEX_Studio2212"
