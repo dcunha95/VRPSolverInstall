@@ -65,6 +65,7 @@ Make sure to download to the repository folder (e.g. `Downloads\VRPSolverInstall
 
 Run the first part of the script to install WSL with Ubuntu 22.04, saving the log with the `Start-Transcript` utility:
 
+
 ```powershell
 Start-Transcript -Append part1_wsl_setup.log
 .\part1_wsl_setup.ps1
