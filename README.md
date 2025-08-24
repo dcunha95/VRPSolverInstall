@@ -75,7 +75,9 @@ If the script asks to reboot the machine, please do so, repeat steps 2 and then 
 
 ```powershell
 cd ~\Downloads\VRPSolverInstall-main
+Start-Transcript -Append part1_wsl_setup.log
 .\part1_wsl_setup.ps1 -Phase2
+Stop-Transcript
 ```
 
 7. **Run the part 2: Setup the linux environment**
