@@ -319,8 +319,8 @@ if (-not $Phase2) {
         # Copy script to WSL
         # Convert Windows path to WSL path and cp the repo folder to the linux home
         $winRepoPath = $PSScriptRoot.ToString().Replace('\', '/').Replace('C:', '/mnt/c')        
-        # wsl -- bash -c "mkdir ~/VRPSolverInstall"
-        wsl -- bash -c "git clone https://github.com/dcunha95/VRPSolverInstall.git"
+        wsl -- bash -c "mkdir ~/VRPSolverInstall"
+        # wsl -- bash -c "git clone https://github.com/dcunha95/VRPSolverInstall.git"
         wsl -- bash -c "cp -r '$winRepoPath'/* ~/VRPSolverInstall/."
         
         # wsl -d Ubuntu -- bash -c "chmod +x $wslScriptPath"
