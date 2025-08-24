@@ -226,9 +226,9 @@ if (-not $Phase2) {
             if ($ubuntuExe) {
                 # & $ubuntuExe.FullName
 
-                Start-Process $ubuntuExe.FullName           
+                #Start-Process $ubuntuExe.FullName           
                 $launched = $true
-                Read-Host -Prompt "After completing the initial setup, press [Enter] to continue"
+                Read-Host -Prompt "Ubuntu terminal should open (if not, open it in the Start Menu). After completing the initial setup (installation, username and password setup), press [Enter] to continue"
             }
         }
         
