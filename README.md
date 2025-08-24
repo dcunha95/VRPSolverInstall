@@ -94,10 +94,11 @@ It should look something like the picture below:
 
 <img width="1471" height="211" alt="image" src="https://github.com/user-attachments/assets/d9f0bee8-1e26-48b5-a5eb-ef8015b5b812" />
 
-Originally the script would be run with the command `./part2_linux_setup.sh`. However, we also desire to store a log, thus run the following:
+Originally the script would be run with the command `./part2_linux_setup.sh`. However, we also desire to store a log. We also desire to reload to refresh the terminal with the new environment variables. Thus we run the following:
  
 ```bash
 script -c "./part2_linux_setup.sh" ./part2_linux_setup.log
+source ~/.bashrc
 ```
 
 Note that you will likely be asked to provide your password, as `sudo` is required for CPLEX and several packages installation. Aditionally, Julia installation will require some interactivity (accept agreements, default install location etc). 
