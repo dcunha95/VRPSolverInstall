@@ -63,7 +63,7 @@ Make sure to download to the repository folder (e.g. `Downloads\VRPSolverInstall
 .\part1_wsl_setup.ps1 -UbuntuVersion "22.04" -Libraries @("python3", "python3-pip") -ScriptToRun "C:\path\to\your\script.sh"
 ``` -->
 
-Run the first part of the script to install WSL with Ubuntu 22.04:
+Run the first part of the script to install WSL with Ubuntu 22.04, saving the log with the `Start-Transcript` utility:
 
 ```powershell
 Start-Transcript -Append part1_wsl_setup.log
@@ -71,7 +71,7 @@ Start-Transcript -Append part1_wsl_setup.log
 Stop-Transcript
 ```
 
-If the script asks to reboot the machine, please do so, repeat steps 2 and then continue the setup by running:
+If the script asks to reboot the machine, please do so, repeat steps 2 (open PowerShell as administrator) and continue the setup by running:
 
 ```powershell
 cd ~\Downloads\VRPSolverInstall-main
@@ -84,7 +84,6 @@ Stop-Transcript
 
 You should now have a copy of the repository in your home directory in linux with copies of CPLEX and BaPCod inside.
 Open the terminal with your preferred method (Ctrl+Alt+T), go to the repo folder and provide permissions to run the script `part2_linux_setup.sh`:
-
 
 ```bash
 cd VRPSolverInstall
@@ -101,5 +100,5 @@ Originally the script would be run with the command `./part2_linux_setup.sh`. Ho
 script -c "./part2_linux_setup.sh" ./part2_linux_setup.log
 ```
 
-Note that you will likely be asked to provide your password, as `sudo` is required for CPLEX and several packages. 
+Note that you will likely be asked to provide your password, as `sudo` is required for CPLEX and several packages installation. 
 
