@@ -100,5 +100,5 @@ Originally the script would be run with the command `./part2_linux_setup.sh`. Ho
 script -c "./part2_linux_setup.sh" ./part2_linux_setup.log
 ```
 
-Note that you will likely be asked to provide your password, as `sudo` is required for CPLEX and several packages installation. 
+Note that you will likely be asked to provide your password, as `sudo` is required for CPLEX and several packages installation. Aditionally, Julia installation will require some interactivity (accept agreements, default install location etc). 
 
