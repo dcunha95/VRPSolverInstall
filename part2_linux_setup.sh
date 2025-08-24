@@ -25,24 +25,24 @@ if_file_exists_remove() {
 }
 
 
-
 # get repo dir and run from it
 ROOT_DIR=$(dirname "$(readlink -f "$0")")
 cd $ROOT_DIR
 user_log STARTING SETUP FROM $ROOT_DIR
 
-# user_log UPDATING SYSTEM
-# apt-get update
+user_log UPDATING SYSTEM
+sudo apt-get update
 
-# user_log INSTALLING SYSTEM DEPENDENCIES 
-# apt install -y cmake default-jre g++ python-is-python3 python3-full
-# apt-get -y install zlib1g-dev build-essential gdb unzip expect
+user_log INSTALLING SYSTEM DEPENDENCIES 
+sudo apt install -y cmake default-jre g++ python-is-python3 python3-full
+sudo apt-get -y install zlib1g-dev build-essential gdb unzip expect
 
-# user_log DOWNLOADING JULIA
-# # curl -fsSL https://install.julialang.org | sh
+user_log DOWNLOADING JULIA
+curl -fsSL https://install.julialang.org | sh
 
-# user_log INSTALLING CPLEX
-# # ./cplex_studio2211.linux_x86_64.bin
+user_log INSTALLING CPLEX
+# sudo ./cplex_studio2211.linux_x86_64.bin
+sudo ./cplex_studio2211.linux_x86_64.bin -f "./misc/cplex_installation_options.properties"
 
 user_log PREPARING BAPCOD
 LAST_BAPCOD=$(ls bapcod*zip | tail -n1)
@@ -75,12 +75,16 @@ CPLEX_ROOT=$(find "/opt/ibm/ILOG/" -maxdepth 1 -type d -name "CPLEX_Studio*" | s
 
 BOOST_ROOT=$ROOT_DIR/bapcodframework/Tools/boost_1_76_0/build
 
+# doesn't exist yet, but whatever
+BAPCOD_RCSP_LIB=$ROOT_DIR/bapcodframework/build/Bapcod/libbapcod-shared.so
+
 print_and_export() {
     echo "export $1=\"$2\""
     export $1=$2
 }
 print_and_export CPLEX_ROOT $CPLEX_ROOT
 print_and_export BOOST_ROOT $BOOST_ROOT
+print_and_export BAPCOD_RCSP_LIB $BAPCOD_RCSP_LIB
 
 
 # Writing to .bashrc
@@ -100,6 +104,7 @@ cat >> "$BASHRC_FILE" << EOF
 $SECTION_START
 export CPLEX_ROOT=$CPLEX_ROOT
 export BOOST_ROOT=$BOOST_ROOT
+export BAPCOD_RCSP_LIB=$BAPCOD_RCSP_LIB
 
 export MY_VAR="some_value"
 export PATH="\$PATH:/my/custom/path"
@@ -122,10 +127,15 @@ minor_log running VertexColoring test
 cd Demos/VertexColoringDemo
 make -j3
 sh ./tests/runTests.sh 
+cd -
 
 minor_log making shared library
 make -j3 bapcod-shared
 
+
+# end of bapcod setup
+
+cd $ROOT_DIR
 
 user_log INSTALLING VRPSolverDemos
 git clone https://github.com/artalvpes/VRPSolverDemos.git
@@ -154,3 +164,4 @@ git clone https://github.com/artalvpes/VRPSolverDemos.git
 # exit
 
 # python /opt/ibm/ILOG/CPLEX_Studio2211/python/setup.py install
+
