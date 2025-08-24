@@ -3,9 +3,10 @@
 This repository is designed as a series of scripts to assist new users in installing VRPSolver. 
 The workflow is designed for assisting installation via WSL (Windows Subsystem for Linux) on Windows, although it might also find use for dedicated linux users (dual-boot or similar). 
 
-If you are using Windows, please make sure you are running the latest version of 10 or 11 to avoid headaches and follow the main usage guide.
+*If you are using Windows, please make sure you are running the latest version of 10 or 11 to avoid headaches and follow the main usage guide.
 
-If you are already using Linux, you will only need to follow steps 1, 4, 5 and 7.
+*If you are already using Linux, you will only need to follow steps 1, 4, 5 and 7. Note that the script is designed for Ubuntu 22.04 LTS. 
+Thus, if you using another distro  also need to modify the script `part2_linux_setup.sh` to use your desired 
 
 ## Main usage guide 
 
