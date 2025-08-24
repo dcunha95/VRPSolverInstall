@@ -159,7 +159,7 @@ if (-not $Phase2) {
     }
 
     # Step 4: Install specified Ubuntu version
-    Write-Log "Installing Ubuntu $UbuntuVersion..."
+    Write-Log "Installing Ubuntu"
     try {
         # Map version to store package name
         $ubuntuPackages = @{
