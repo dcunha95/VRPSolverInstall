@@ -5,7 +5,8 @@ param(
     [string]$UbuntuVersion = "22.04",
     [string]$ScriptToRun = "",
     [string[]]$Libraries = @(),
-    [switch]$Phase2 = $false
+    [switch]$Phase2 = $false,
+    [string]$Hotkey = "Ctrl+Alt+T",
 )
 
 # Function to check if running as administrator
@@ -183,7 +184,7 @@ if (-not $Phase2) {
             Write-Log "Installing Ubuntu $UbuntuVersion"
             
             # winget install --id $packageName --source msstore --accept-package-agreements --accept-source-agreements
-            wsl --install -d Ubuntu-22.04
+            wsl --install -d $packageName
             
             Write-Log "Ubuntu $UbuntuVersion installed successfully" "SUCCESS"
         } else {
@@ -249,7 +250,7 @@ if (-not $Phase2) {
         $Shortcut = $WshShell.CreateShortcut($ShortcutPath)
 
         # Set properties
-        $Shortcut.HotKey = "Ctrl+Alt+T"
+        $Shortcut.HotKey = $Hotkey
         $Shortcut.TargetPath = $ubuntuExe.FullName
         $Shortcut.Description = "Opens $($ubuntuExe.Name)"
 
