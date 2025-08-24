@@ -6,7 +6,7 @@ param(
     [string]$ScriptToRun = "",
     [string[]]$Libraries = @(),
     [switch]$Phase2 = $false,
-    [string]$Hotkey = "Ctrl+Alt+T",
+    [string]$Hotkey = "Ctrl+Alt+T"
 )
 
 # Function to check if running as administrator
