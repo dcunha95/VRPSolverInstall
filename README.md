@@ -10,6 +10,8 @@ Note that the script is designed for Ubuntu 22.04 LTS, so if you are using anoth
 
 **DISCLAIMER**: Please note that the provided scripts come with no warranty, of any kind. 
 
+If you ran into any issues, please open an issue.
+
 ## Main usage guide 
 
 1. **Download this repository in a common folder**
