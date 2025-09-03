@@ -8,6 +8,8 @@ If you are using Windows, please make sure you are running the latest version of
 If you are already using Linux, you will only need to follow steps 1, 4, 5 and 7. 
 Note that the script is designed for Ubuntu 22.04 LTS, so if you are using another distro you will need to modify the script `part2_linux_setup.sh` to use the appropriate package manager, and possibly solve other issues. 
 
+**DISCLAIMER**: Please note that the provided scripts come with no warranty, of any kind. 
+
 ## Main usage guide 
 
 1. **Download this repository in a common folder**
