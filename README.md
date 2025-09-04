@@ -19,7 +19,7 @@ If you run into any issues, please open an issue.
 To run PowerShell as an administrator, search for "PowerShell" in the Start menu, right-click on it, and select "Run as administrator."
 Alternatively, you can press Win + R, type "powershell," and then press Ctrl + Shift + Enter. 
 
-After that install git, if you don't have it (copy-paste the snippet below in your PowerShell terminal and press Enter):
+After that, install git if you don't have it (copy-paste the snippet below in your PowerShell terminal and press Enter):
 
 ```powershell
 cd ~
