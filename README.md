@@ -14,38 +14,37 @@ If you run into any issues, please open an issue.
 
 ## Main usage guide 
 
-1. **Download this repository in a common folder**
-
-On this page click on *Code* > *Download ZIP*. Save it to the *Downloads* folder.
-If you are familiar with git, you might clone this repo in your preferred manner.
- 
-2. **Open PowerShell as Administrator**
+1. **Open PowerShell as Administrator and install git**
 
 To run PowerShell as an administrator, search for "PowerShell" in the Start menu, right-click on it, and select "Run as administrator."
 Alternatively, you can press Win + R, type "powershell," and then press Ctrl + Shift + Enter. 
-After that go to the home directory (copy-paste the snippet below in your PowerShell terminal and press Enter):
+
+After that install git, if you don't have it (copy-paste the snippet below in your PowerShell terminal and press Enter):
 
 ```powershell
 cd ~
+winget install --id Git.Git -e --source winget
 ```
 
-3. **Go to the repository folder**
-
-Assuming you have downloaded a zip file and put it in the *Downloads* folder, unzip it and go to the folder:
+After the installation is complete, refresh your PowerShell terminal (close and reopen it as administrator)
+   
+2. **Clone this repository to the Downloads folder**
+ 
+Go to the *Downloads* folder directory, clone this repository and enter it (copy-paste the snippet below in your PowerShell terminal and press Enter):
 
 ```powershell
-cd Downloads
-unzip VRPSolverInstall-main.zip
-cd VRPSolverInstall-main
+cd ~/Downloads
+git clone https://github.com/dcunha95/VRPSolverInstall.git
+cd VRPSolverInstall
 ```
 
-4. **Download BaPCod**
+3. **Download BaPCod**
 
 Go to the website (https://bapcod-process.math.u-bordeaux.fr/index.html#download), fill the form, accept the agreement and download the zip file.
 
 Make sure to download to the repository folder (e.g. `Downloads\VRPSolverInstall-main`), as the script will use it.
 
-5. **Download CPLEX**
+4. **Download CPLEX**
 
 For academics, go the website (https://academic.ibm.com/a2mt/), register and download CPLEX **FOR LINUX x86-64**.
 It should be under the *Data Science* field. 
@@ -54,7 +53,7 @@ When selecting the correct version, you might set the download method to HTTP if
 Make sure to download to the repository folder (e.g. `Downloads\VRPSolverInstall-main`), as the script will use it.
 
 
-6. **Run the part 1 script: Install WSL**
+5. **Run the part 1 script: Install WSL**
 
 <!-- ```powershell
 # Basic installation with Ubuntu 22.04 (default)
@@ -68,7 +67,6 @@ Make sure to download to the repository folder (e.g. `Downloads\VRPSolverInstall
 ``` -->
 
 Run the first part of the script to install WSL with Ubuntu 22.04, saving the log with the `Start-Transcript` utility:
-
 
 ```powershell
 Start-Transcript -Append part1_wsl_setup.log
@@ -85,7 +83,7 @@ Start-Transcript -Append part1_wsl_setup.log
 Stop-Transcript
 ```
 
-7. **Run the part 2: Setup the linux environment**
+6. **Run the part 2: Setup the linux environment**
 
 You should now have a copy of the repository in your home directory in linux with copies of CPLEX and BaPCod inside.
 Open the terminal with your preferred method (Ctrl+Alt+T), go to the repo folder and provide permissions to run the script `part2_linux_setup.sh`:
