@@ -14,7 +14,7 @@ If you run into any issues, please open an issue.
 
 ## Main usage guide 
 
-1. **Open PowerShell as Administrator and install git**
+1. **Open PowerShell as Administrator and if necessary, install git**
 
 To run PowerShell as an administrator, search for "PowerShell" in the Start menu, right-click on it, and select "Run as administrator."
 Alternatively, you can press Win + R, type "powershell," and then press Ctrl + Shift + Enter. 
