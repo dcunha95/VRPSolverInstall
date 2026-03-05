@@ -36,7 +36,7 @@ sudo apt-get update
 
 # install dependencies
 user_log INSTALLING REQUIREMENTS 
-sudo apt install -y cmake default-jre g++ python-is-python3 python3-full
+sudo apt install -y cmake default-jre g++ python-is-python3 python3-full wget
 sudo apt-get -y install zlib1g-dev build-essential gdb unzip expect
 
 # julia
@@ -45,14 +45,22 @@ curl -fsSL https://install.julialang.org | sh
 
 # cplex
 user_log INSTALLING CPLEX
+chmod +x cplex_studio2211.linux_x86_64.bin
 # sudo ./cplex_studio2211.linux_x86_64.bin
 sudo ./cplex_studio2211.linux_x86_64.bin -f "./misc/cplex_installation_options.properties"
 
 # unzipping bapcod
 user_log PREPARING BAPCOD
-LAST_BAPCOD=$(ls bapcod*zip | tail -n1)
+LAST_BAPCOD=$(\ls bapcod*zip | \tail -n1)
 if_dir_exists_remove bapcodframework
 unzip -q $LAST_BAPCOD
+
+# check if bapcodframework is within another folder
+LAST_BAPCOD_FOLDER="${LAST_BAPCOD%.*}"
+if [[ -e "$LAST_BAPCOD_FOLDER" ]]; then
+    mv $LAST_BAPCOD_FOLDER/bapcodframework .
+    rmdir $LAST_BAPCOD_FOLDER
+fi
 
 cd bapcodframework/Tools/
 if [ -f "rcsp.zip" ]; then
