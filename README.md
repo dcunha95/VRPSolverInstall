@@ -5,7 +5,7 @@ The workflow is designed for assisting installation via WSL (Windows Subsystem f
 
 If you are using Windows, please make sure you are running the latest version of 10 or 11 to avoid headaches and follow the main usage guide.
 
-If you are already using Linux, you will only need to look into steps 2, 4, 5 and 7, as applicable.
+If you are already using Linux, you will mosttly need to look into steps 3, 4 and 6, as applicable. 
 Note that the script is designed for Ubuntu 22.04 LTS, so if you are using another distro you will need to modify the script `part2_linux_setup.sh` to use the appropriate package manager, and possibly solve other issues. 
 
 **DISCLAIMER**: Please note that the provided scripts come with no warranty, of any kind. 
