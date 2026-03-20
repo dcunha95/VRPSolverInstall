@@ -68,6 +68,14 @@ cd bapcodframework
 if_file_exists_remove Tools/boost_1_76_0.tar.gz
 if_dir_exists_remove Tools/boost_1_76_0
 wget -P Tools/ https://archives.boost.io/release/1.76.0/source/boost_1_76_0.tar.gz
+
+# fix boost install script
+OLD_STRING='./b2 cxxflags=" -fPIC " cflags=" -fPIC $CFLAGS " -j$cpuX2 --with-system --with-filesystem --with-program_options --with-thread --with-chrono --with-timer  install --prefix=./build/ && \'
+NEW_STRING='./b2 cxxstd=11 cxxflags=" -Wno-enum-constexpr-conversion -fPIC " cflags=" -fPIC $CFLAGS " -j$cpuX2 --with-system --with-filesystem --with-program_options --with-thread --with-chrono --with-timer  install --prefix=./build/ && \'
+ESCAPED_OLD_STR=$(printf '%s\n' "$OLD_STRING" | sed 's/[&/\]/\\&/g')
+ESCAPED_NEW_STR=$(printf '%s\n' "$NEW_STRING" | sed 's/[&/\]/\\&/g')
+sed -i "s|$ESCAPED_OLD_STR|$ESCAPED_NEW_STR|g" Scripts/shell/install_bc_boost.sh
+
 bash Scripts/shell/install_bc_boost.sh
 
 # lemon
