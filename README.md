@@ -77,7 +77,7 @@ Stop-Transcript
 If the script asks to reboot the machine, please do so, reopen PowerShell as administrator and continue the setup by running:
 
 ```powershell
-cd ~\Downloads\VRPSolverInstall-main
+cd ~\Downloads\VRPSolverInstall
 Start-Transcript -Append part1_wsl_setup.log
 .\part1_wsl_setup.ps1 -Phase2
 Stop-Transcript
