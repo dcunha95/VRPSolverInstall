@@ -86,7 +86,7 @@ Stop-Transcript
 6. **Run the part 2: Setup the linux environment**
 
 You should now have a copy of the repository in your home directory in linux with copies of CPLEX and BaPCod inside.
-Open the terminal with your preferred method (Ctrl+Alt+T), go to the repo folder and provide permissions to run the script `part2_linux_setup.sh`:
+Open the *linux* terminal with your preferred method (Ctrl+Alt+T), go to the repo folder and provide permissions to run the script `part2_linux_setup.sh`:
 
 ```bash
 cd VRPSolverInstall
