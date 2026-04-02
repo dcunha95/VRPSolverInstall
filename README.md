@@ -33,7 +33,7 @@ cd ~
 winget install -e --id Microsoft.VisualStudioCode
 ```
 
-After the installation is complete, refresh your PowerShell terminal (close and reopen it as administrator)
+After the installation is complete, refresh your PowerShell terminal (close and reopen it as administrator).
 If you did install VS Code, please reboot the computer before proceeding.
    
 2. **Clone this repository to the Downloads folder**
