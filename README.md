@@ -14,7 +14,7 @@ If you run into any issues, please open an issue.
 
 ## Main usage guide 
 
-1. **Open PowerShell as Administrator and if necessary, install git**
+1. **Open PowerShell as Administrator and if necessary, install git and VS Code**
 
 To run PowerShell as an administrator, search for "PowerShell" in the Start menu, right-click on it, and select "Run as administrator."
 Alternatively, you can press Win + R, type "powershell," and then press Ctrl + Shift + Enter. 
@@ -26,7 +26,15 @@ cd ~
 winget install --id Git.Git -e --source winget
 ```
 
+Finally, install VS Code if you don't have it. 
+
+```powershell
+cd ~
+winget install -e --id Microsoft.VisualStudioCode
+```
+
 After the installation is complete, refresh your PowerShell terminal (close and reopen it as administrator)
+If you did install VS Code, please reboot the computer before proceeding.
    
 2. **Clone this repository to the Downloads folder**
  
