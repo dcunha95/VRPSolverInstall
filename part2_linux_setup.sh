@@ -53,6 +53,7 @@ user_log PREPARING BAPCOD
 LAST_BAPCOD=$(ls bapcod*zip | tail -n1)
 if_dir_exists_remove bapcodframework
 unzip -q $LAST_BAPCOD
+mv bapcod-0.84/bapcodframework .
 
 cd bapcodframework/Tools/
 if [ -f "rcsp.zip" ]; then
